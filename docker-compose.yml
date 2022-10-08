@@ -33,7 +33,7 @@ services:
       - cadastro_vendas_network
 
   php:
-    image: thiagotrancoso/php7.4-fpm-dev:v2
+    image: thiagotrancoso/php7.4-fpm-dev:v3
     container_name: php
     volumes:
       - ./:/var/www
@@ -45,7 +45,7 @@ services:
       - cadastro_vendas_network
 
   queue:
-    image: thiagotrancoso/php8.1-fpm-dev:v1
+    image: thiagotrancoso/php7.4-fpm-dev:v3
     container_name: queue
     restart: unless-stopped
     command: php /var/www/queues.php
