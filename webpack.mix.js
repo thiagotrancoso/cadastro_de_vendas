@@ -40,5 +40,11 @@ mix
   // AdminLte - Plugin: SweetAlert2
   .copyDirectory('./node_modules/admin-lte/plugins/sweetalert2', './public/assets/app/plugins/sweetalert2')
 
+  // AdminLte - Plugin: bootstrap-switch
+  .copyDirectory('./node_modules/admin-lte/plugins/bootstrap-switch', './public/assets/app/plugins/bootstrap-switch')
+
+  // Custom CSS
+  .sass('./resources/sass/custom.scss', './public/assets/app/css/custom.min.css')
+
   .js('resources/js/app.js', 'public/js')
   .sass('resources/sass/app.scss', 'public/css');

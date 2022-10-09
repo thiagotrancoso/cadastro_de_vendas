@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 # ------------------------------------------------------------------------------------------
@@ -39,7 +40,12 @@ Route::prefix('/app')
         Route::get('/', function () { return view('dashboard'); })->name('app.dashboard');
 
         // Usuários
-        Route::get('/usuarios', function () { return view('app.users.all'); })->name('app.users.all');
+        Route::get('/usuarios', [UserController::class, 'list'])->name('app.users.list');
+        Route::get('/usuarios/cadastrar', [UserController::class, 'create'])->name('app.users.create');
+        Route::post('/usuarios', [UserController::class, 'store'])->name('app.users.store');
+        Route::get('/usuarios/{id}/editar', [UserController::class, 'edit'])->name('app.users.edit');
+        Route::put('/usuarios/{id}', [UserController::class, 'update'])->name('app.users.update');
+        Route::delete('/usuarios/{id}', [UserController::class, 'destroy'])->name('app.users.destroy');
 
         // Produtos
         Route::get('/produtos', function () { return view('app.products.all'); })->name('app.products.all');
