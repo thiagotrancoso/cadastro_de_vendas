@@ -9,35 +9,35 @@
         <nav class="mt-2">
             <ul class="nav nav-pills nav-sidebar flex-column nav-flat" data-widget="treeview" role="menu" data-accordion="true">
                 <li class="nav-item">
-                    <a href="{{ route('app.dashboard') }}" class="nav-link">
+                    <a href="{{ route('app.dashboard') }}" class="nav-link {{ menu_active('app.dashboard') }}">
                         <i class="nav-icon fas fa-tachometer-alt"></i>
                         <p>Dashboard</p>
                     </a>
                 </li>
 
                 <li class="nav-item">
-                    <a href="{{ route('app.users.all') }}" class="nav-link">
+                    <a href="{{ route('app.users.list') }}" class="nav-link {{ menu_active('app.users*') }}">
                         <i class="nav-icon fas fa-users"></i>
                         <p>Usuários</p>
                     </a>
                 </li>
 
                 <li class="nav-item">
-                    <a href="{{ route('app.products.all') }}" class="nav-link">
+                    <a href="{{ route('app.products.all') }}" class="nav-link {{ menu_active('app.products*') }}">
                         <i class="nav-icon fas fa-boxes"></i>
                         <p>Produtos</p>
                     </a>
                 </li>
 
                 <li class="nav-item">
-                    <a href="{{ route('app.sales.all') }}" class="nav-link">
+                    <a href="{{ route('app.sales.all') }}" class="nav-link {{ menu_active('app.sales*') }}">
                         <i class="nav-icon fas fa-dollar-sign"></i>
                         <p>Vendas</p>
                     </a>
                 </li>
 
                 <li class="nav-item">
-                    <a href="{{ route('app.reports.all') }}" class="nav-link">
+                    <a href="{{ route('app.reports.all') }}" class="nav-link {{ menu_active('app.reports*') }}">
                         <i class="nav-icon fas fa-clipboard-list"></i>
                         <p>Relatórios</p>
                     </a>
@@ -48,14 +48,14 @@
                 </li>
 
                 <li class="nav-item">
-                    <a href="{{ route('app.profile.index') }}" class="nav-link">
+                    <a href="{{ route('app.profile.index') }}" class="nav-link {{ menu_active('app.profile*') }}">
                         <i class="nav-icon fas fa-user-cog"></i>
                         <p>Meu perfil</p>
                     </a>
                 </li>
 
                 <li class="nav-item">
-                    <a href="{{ route('app.settings.index') }}" class="nav-link">
+                    <a href="{{ route('app.settings.index') }}" class="nav-link {{ menu_active('app.settings*') }}">
                         <i class="nav-icon fas fa-cogs"></i>
                         <p>Configurações</p>
                     </a>
