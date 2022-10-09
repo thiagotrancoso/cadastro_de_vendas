@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Route;
 
 # ------------------------------------------------------------------------------------------
-# Authentication Routes
+# Rotas de autenticação
 # ------------------------------------------------------------------------------------------
 // Authentication
 Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');
@@ -29,9 +29,36 @@ Route::get('email/verify', 'Auth\VerificationController@show')->name('verificati
 Route::get('email/verify/{id}/{hash}', 'Auth\VerificationController@verify')->name('verification.verify');
 Route::post('email/resend', 'Auth\VerificationController@resend')->name('verification.resend');
 
+# ------------------------------------------------------------------------------------------
+# Rotas da aplicação
+# ------------------------------------------------------------------------------------------
+Route::prefix('/app')
+    ->middleware(['auth'])
+    ->group(function () {
+        // Dashboard
+        Route::get('/', function () { return view('dashboard'); })->name('app.dashboard');
 
-Route::get('/', function () {
-    return view('welcome');
-});
+        // Usuários
+        Route::get('/usuarios', function () { return view('app.users.all'); })->name('app.users.all');
 
+        // Produtos
+        Route::get('/produtos', function () { return view('app.products.all'); })->name('app.products.all');
+
+        // Vendas
+        Route::get('/vendas', function () { return view('app.sales.all'); })->name('app.sales.all');
+
+        // Relatórios
+        Route::get('/relatorios', function () { return view('app.reports.all'); })->name('app.reports.all');
+
+        // Meu perfil
+        Route::get('/meu-perfil', function () { return view('app.profile.index'); })->name('app.profile.index');
+
+        // Configurações
+        Route::get('/configuracoes', function () { return view('app.settings.index'); })->name('app.settings.index');
+    });
+
+# ------------------------------------------------------------------------------------------
+# Outras rotas
+# ------------------------------------------------------------------------------------------
+Route::get('/', function () { return view('welcome'); });
 Route::get('/home', 'HomeController@index')->name('home');
