@@ -12,15 +12,14 @@
     <!-- Right navbar links -->
     <ul class="navbar-nav ml-auto">
         <li class="nav-item dropdown">
-            <a href="#" class="nav-link" data-toggle="dropdown">
-                <img src=""
-                    alt=""
-                    class="profile_image rounded-circle">
+            <a href="#" class="nav-link" data-toggle="dropdown" style="display: flex; gap: 6px;">
+                <span>{{ auth()->user()->name }}</span>
+                <i class="fas fa-user-circle" style="font-size: 1.8rem;"></i>
             </a>
 
             <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
                 <div class="p-3">
-                    Name
+                    {{ auth()->user()->name }}
                 </div>
 
                 <div class="dropdown-divider"></div>
@@ -32,7 +31,7 @@
             </div>
         </li>
 
-        <form method="post" id="logout-form" action="">
+        <form method="POST" action="{{ route('logout') }}" id="logout-form" style="display: none;">
             @csrf
         </form>
     </ul>
