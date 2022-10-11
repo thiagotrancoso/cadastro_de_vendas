@@ -22,6 +22,8 @@ class UpdateUserFormRequest extends FormRequest
         $inputs = parent::all();
         $inputs['active'] = isset($inputs['active']);
         $inputs['role'] = $inputs['role'] ?? null;
+        $inputs['password'] = $inputs['password'] ?? null;
+        $inputs['current_password'] = $inputs['current_password'] ?? null;
 
         return $inputs;
     }

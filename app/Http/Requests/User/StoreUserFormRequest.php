@@ -20,7 +20,7 @@ class StoreUserFormRequest extends FormRequest
     public function all($keys = null)
     {
         $inputs = parent::all();
-        $inputs['role'] = $inputs['role'] ?? null;
+        $inputs['role'] = $inputs['role'] ?? 'Cliente';
 
         return $inputs;
     }
