@@ -12,9 +12,6 @@
         <!-- Font Awesome -->
         <link rel="stylesheet" href="{{ asset('assets/app/plugins/fontawesome-free/css/all.min.css') }}">
 
-        <!-- icheck bootstrap -->
-        <link rel="stylesheet" href="{{ asset('assets/app/plugins/icheck-bootstrap/icheck-bootstrap.min.css') }}">
-
         <!-- SweetAlert2 -->
         <link rel="stylesheet" href="{{ asset('assets/app/plugins/sweetalert2/sweetalert2.min.css') }}">
 
