@@ -1,6 +1,11 @@
 ## Informações
 - [Modelo do banco de dados](https://dbdiagram.io/d/6340d498f0018a1c5fbd49f5)
 
+## Executar o projeto
+```
+docker compose up -d
+```
+
 ## Configurar o projeto
 **Banco de dados**  
 Criar um banco de dados com o nome `cadastro_vendas`.
@@ -25,11 +30,6 @@ npm run dev
 php artisan migrate --seed
 ```
 Todos os usuários gerados tem a senha `12345678`
-
-## Executar o projeto
-```
-docker compose up -d
-```
 
 ## Dados para acessar o sistema
 ```
