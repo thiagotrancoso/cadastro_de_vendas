@@ -19,6 +19,18 @@ services:
     networks:
       - cadastro_vendas_network
 
+  php:
+    image: thiagotrancoso/php7.4-fpm-dev:v3
+    container_name: php
+    volumes:
+      - ./:/var/www
+      - ./docker/config/php/conf.d:/usr/local/etc/php/conf.d
+    working_dir: /var/www
+    depends_on:
+      - postgres
+    networks:
+      - cadastro_vendas_network
+
   postgres:
     image: postgres:11
     container_name: postgres
@@ -32,66 +44,54 @@ services:
     networks:
       - cadastro_vendas_network
 
-  php:
-    image: thiagotrancoso/php7.4-fpm-dev:v3
-    container_name: php
-    volumes:
-      - ./:/var/www
-      - ./docker/config/php/conf.d:/usr/local/etc/php/conf.d
-    working_dir: /var/www
-    depends_on:
-      - postgres
-    networks:
-      - cadastro_vendas_network
+  # queue:
+  #   image: thiagotrancoso/php7.4-fpm-dev:v3
+  #   container_name: queue
+  #   restart: unless-stopped
+  #   command: php /var/www/queues.php
+  #   volumes:
+  #     - ./:/var/www
+  #     - ./docker/config/php/conf.d:/usr/local/etc/php/conf.d
+  #   working_dir: /var/www
+  #   depends_on:
+  #     - php
+  #     - nginx
+  #     - rabbitmq
+  #   networks:
+  #     - cadastro_vendas_network
 
-  queue:
-    image: thiagotrancoso/php7.4-fpm-dev:v3
-    container_name: queue
-    restart: unless-stopped
-    command: php /var/www/queues.php
-    volumes:
-      - ./:/var/www
-      - ./docker/config/php/conf.d:/usr/local/etc/php/conf.d
-    working_dir: /var/www
-    depends_on:
-      - php
-      - nginx
-      - rabbitmq
-    networks:
-      - cadastro_vendas_network
+  # rabbitmq:
+  #   image: rabbitmq:3.10-management
+  #   container_name: rabbitmq
+  #   environment:
+  #     RABBITMQ_DEFAULT_USER: admin
+  #     RABBITMQ_DEFAULT_PASS: 12345678
+  #   restart: unless-stopped
+  #   ports:
+  #     - 5672:5672
+  #     - 15672:15672
+  #   volumes:
+  #     - volume_rabbitmq:/var/lib/rabbitmq
+  #   networks:
+  #     - cadastro_vendas_network
 
-  rabbitmq:
-    image: rabbitmq:3.10-management
-    container_name: rabbitmq
-    environment:
-      RABBITMQ_DEFAULT_USER: admin
-      RABBITMQ_DEFAULT_PASS: 12345678
-    restart: unless-stopped
-    ports:
-      - 5672:5672
-      - 15672:15672
-    volumes:
-      - volume_rabbitmq:/var/lib/rabbitmq
-    networks:
-      - cadastro_vendas_network
-
-  mongodb:
-    image: mongo:5.0
-    container_name: mongodb
-    hostname: mongodb
-    volumes:
-      - volume_mongodb_configdb:/data/configdb
-      - volume_mongodb_db:/data/db
-    ports:
-      - 27017:27017
-    networks:
-      - cadastro_vendas_network
+  # mongodb:
+  #   image: mongo:5.0
+  #   container_name: mongodb
+  #   hostname: mongodb
+  #   volumes:
+  #     - volume_mongodb_configdb:/data/configdb
+  #     - volume_mongodb_db:/data/db
+  #   ports:
+  #     - 27017:27017
+  #   networks:
+  #     - cadastro_vendas_network
 
 volumes:
   volume_postgres:
-  volume_rabbitmq:
-  volume_mongodb_configdb:
-  volume_mongodb_db:
+  # volume_rabbitmq:
+  # volume_mongodb_configdb:
+  # volume_mongodb_db:
 
 networks:
   cadastro_vendas_network:
