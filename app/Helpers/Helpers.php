@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 if (!function_exists('menu_active')) {
@@ -60,5 +61,26 @@ if (!function_exists('option_selected')) {
         }
 
         return '';
+    }
+}
+
+if (!function_exists('has_role')) {
+    /**
+     * Verifica se o usuário logado tem permissão.
+     *
+     * @param string $role Perfil separado por pipe "|".
+     * @return boolean
+     */
+    function has_role(string $role): bool
+    {
+        $userRole = Auth::user()->role;
+
+        if (strpos($role, '|') === false) {
+            return $userRole === $role;
+        }
+
+        $roles = explode('|', $role);
+
+        return in_array($userRole, $roles, true);
     }
 }
