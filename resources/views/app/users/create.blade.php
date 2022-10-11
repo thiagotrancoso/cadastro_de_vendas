@@ -6,12 +6,20 @@
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
-                <h1>Cadastrar usuário</h1>
+                @if (auth()->user()->role === 'Administrador')
+                    <h1>Cadastrar usuário</h1>
+                @elseif (auth()->user()->role === 'Vendedor')
+                    <h1>Cadastrar cliente</h1>
+                @endif
             </div>
 
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
-                    <li class="breadcrumb-item"><a href="{{ route('app.users.list') }}">Usuários</a></li>
+                    @if (auth()->user()->role === 'Administrador')
+                        <li class="breadcrumb-item"><a href="{{ route('app.users.list') }}">Usuários</a></li>
+                    @elseif (auth()->user()->role === 'Vendedor')
+                        <li class="breadcrumb-item"><a href="{{ route('app.users.list') }}">Clientes</a></li>
+                    @endif
                     <li class="breadcrumb-item active">Cadastrar</li>
                 </ol>
             </div>

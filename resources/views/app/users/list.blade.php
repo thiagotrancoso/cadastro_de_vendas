@@ -6,12 +6,20 @@
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
+                @if (auth()->user()->role === 'Administrador')
                 <h1>Usuários</h1>
+                @elseif (auth()->user()->role === 'Vendedor')
+                    <h1>Clientes</h1>
+                @endif
             </div>
 
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
-                    <li class="breadcrumb-item active">Usuários</li>
+                    @if (auth()->user()->role === 'Administrador')
+                        <li class="breadcrumb-item active">Usuários</li>
+                    @elseif (auth()->user()->role === 'Vendedor')
+                        <li class="breadcrumb-item active">Clientes</li>
+                    @endif
                 </ol>
             </div>
         </div>
@@ -59,11 +67,7 @@
                                                 <i class="fas fa-pencil-alt"></i>
                                             </a>
 
-                                            @if(auth()->user()->id !== $user->id)
-                                                {{-- <a href="{{ route('app.users.edit', $user->id) }}" class="btn btn-danger">
-                                                    <i class="far fa-trash-alt"></i>
-                                                </a> --}}
-
+                                            @if(auth()->user()->id !== $user->id && has_role('Administrador'))
                                                 <button type="button"
                                                     data-toggle="modal"
                                                     data-target="#modal-delete"

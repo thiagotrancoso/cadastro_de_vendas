@@ -6,12 +6,20 @@
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
-                <h1>Editar usuário</h1>
+                @if (auth()->user()->role === 'Administrador')
+                    <h1>Editar usuário</h1>
+                @elseif (auth()->user()->role === 'Vendedor')
+                    <h1>Editar cliente</h1>
+                @endif
             </div>
 
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
-                    <li class="breadcrumb-item"><a href="{{ route('app.users.list') }}">Usuários</a></li>
+                    @if (auth()->user()->role === 'Administrador')
+                        <li class="breadcrumb-item"><a href="{{ route('app.users.list') }}">Usuários</a></li>
+                    @elseif (auth()->user()->role === 'Vendedor')
+                        <li class="breadcrumb-item"><a href="{{ route('app.users.list') }}">Clientes</a></li>
+                    @endif
                     <li class="breadcrumb-item active">Editar</li>
                 </ol>
             </div>
@@ -89,43 +97,48 @@
                         </div>
                     @endif
 
-                    <div class="form-group">
-                        <label for="current_password">Senha atual:</label>
-                        <div class="input-group mb-3">
-                            <input type="password" id="current_password" name="current_password"
-                                class="form-control @error('current_password') is-invalid @enderror @error('password') is-invalid @enderror"
-                                aria-describedby="current_password_validation">
+                    @if ($user->role === 'Administrador' || $user->id === $userEdit->id)
+                        <div class="form-group">
+                            <label for="current_password">Senha atual:</label>
+                            <div class="input-group mb-3">
+                                <input type="password" id="current_password" name="current_password"
+                                    class="form-control @error('current_password') is-invalid @enderror @error('password') is-invalid @enderror"
+                                    aria-describedby="current_password_validation">
 
-                            @error('current_password')
-                                <div id="current_password_validation" class="invalid-feedback">
-                                    {{ $message }}
-                                </div>
-                            @enderror
+                                @error('current_password')
+                                    <div id="current_password_validation" class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
+                            </div>
                         </div>
-                    </div>
 
-                    <div class="form-group mb-0">
-                        <label for="password">Nova senha:</label>
-                        <div class="input-group">
-                            <input type="password" id="password" name="password"
-                                class="form-control @error('password') is-invalid @enderror @error('current_password') is-invalid @enderror"
-                                aria-describedby="password_validation">
+                        <div class="form-group mb-0">
+                            <label for="password">Nova senha:</label>
+                            <div class="input-group">
+                                <input type="password" id="password" name="password"
+                                    class="form-control @error('password') is-invalid @enderror @error('current_password') is-invalid @enderror"
+                                    aria-describedby="password_validation">
 
-                            @error('password')
-                                <div id="password_validation" class="invalid-feedback">
-                                    {{ $message }}
-                                </div>
-                            @enderror
+                                @error('password')
+                                    <div id="password_validation" class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
+                            </div>
                         </div>
-                    </div>
+                    @endif
                 </div>
 
                 <div class="card-footer text-right">
                     <button type="submit" class="btn btn-success">Salvar</button>
-                    <button type="button"
-                        data-toggle="modal"
-                        data-target="#modal-delete"
-                        class="btn btn-danger">Excluir</button>
+
+                    @if (has_role('Administrador'))
+                        <button type="button"
+                            data-toggle="modal"
+                            data-target="#modal-delete"
+                            class="btn btn-danger">Excluir</button>
+                    @endif
                 </div>
             </div>
         </form>
