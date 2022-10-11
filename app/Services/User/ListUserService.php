@@ -19,9 +19,9 @@ class ListUserService
     private function getUsers(string $role)
     {
         if ($role === 'Administrador') {
-            return User::paginate(20);
+            return User::orderBy('name', 'asc')->paginate(20);
         }
 
-        return User::where('role', 'Cliente')->paginate(20);
+        return User::where('role', 'Cliente')->orderBy('name', 'asc')->paginate(20);
     }
 }
