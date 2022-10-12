@@ -46,6 +46,6 @@ class UsersSeeder extends Seeder
             'updated_at' => null
         ]);
 
-        factory(App\User::class, 100)->create();
+        factory(User::class, 100)->create();
     }
 }
