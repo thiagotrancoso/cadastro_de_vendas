@@ -30,7 +30,7 @@
 
                 @if (has_role('Administrador|Vendedor'))
                     <li class="nav-item">
-                        <a href="{{ route('app.products.all') }}" class="nav-link {{ menu_active('app.products*') }}">
+                        <a href="{{ route('app.products.list') }}" class="nav-link {{ menu_active('app.products*') }}">
                             <i class="nav-icon fas fa-boxes"></i>
                             <p>Produtos</p>
                         </a>
