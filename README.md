@@ -15,6 +15,8 @@ docker compose up -d
 **Banco de dados**  
 Criar um banco de dados com o nome `cadastro_vendas`.
 
+> Executar os comandos abaixo dentro do container do `php`.
+
 **Instalar dependências do composer**
 ```
 composer install
