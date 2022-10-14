@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Product\StoreProductFormRequest;
+use App\Services\Product\CreateProductService;
 use App\Services\Product\ListProductService;
 use Illuminate\Http\Request;
 
@@ -22,9 +24,9 @@ class ProductController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(CreateProductService $createProductService)
     {
-        //
+        return $createProductService->form();
     }
 
     /**
@@ -33,9 +35,9 @@ class ProductController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreProductFormRequest $request, CreateProductService $createProductService)
     {
-        //
+        return $createProductService->execute($request->all());
     }
 
     /**

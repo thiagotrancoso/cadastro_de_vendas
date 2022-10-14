@@ -8,7 +8,7 @@ class ListProductService
 {
     public function execute()
     {
-        $products = Product::paginate(20);
+        $products = Product::orderBy('name', 'asc')->paginate(20);
 
         return view('app.products.list', [
             'products' => $products

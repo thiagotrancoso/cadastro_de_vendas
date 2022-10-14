@@ -50,6 +50,8 @@ Route::prefix('/app')
 
         // Produtos
         Route::get('/produtos', [ProductController::class, 'list'])->name('app.products.list');
+        Route::get('/produtos/cadastrar', [ProductController::class, 'create'])->name('app.products.create');
+        Route::post('/produtos', [ProductController::class, 'store'])->name('app.products.store');
 
         // Vendas
         Route::get('/vendas', function () { return view('app.sales.all'); })->name('app.sales.all');
